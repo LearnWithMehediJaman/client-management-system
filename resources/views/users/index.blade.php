@@ -1,23 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Clients') }}
+            {{ __('Users') }}
         </h2>
     </x-slot>
-
+    
     <div class="py-12">
-
+        
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ route('clients.create') }}"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ">
-                Create New Client
+            <a href="{{ route('users.create') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ">
+                Create New User
             </a>
-
-            <a href="{{ route('clients.recycleBin') }}"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ">
-                Recycle Bin
-            </a>
-
 
             <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -33,19 +26,19 @@
                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                     <li>
-                        <a href="{{ route('clients.exportToExcel') }}"
+                        <a href="{{ route('users.exportToExcel') }}"
                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Export to Excel</a>
                     </li>
                     <li>
-                        <a href="{{ route('clients.exportToPDF') }}"
+                        <a href="{{ route('users.exportToPDF') }}"
                             class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Export to PDF</a>
                     </li>
                 </ul>
             </div>
-
+            
             <div class="mt-4 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                
+                <div class="p-6 text-gray-900 dark:text-gray-100">                   
 
 
                     <div class="relative overflow-x-auto">
@@ -59,17 +52,10 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
-                                        Client Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Phone
+                                        User Name
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Email
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3">
-                                        Address
                                     </th>
 
                                     <th scope="col" class="px-6 py-3">
@@ -78,34 +64,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($clients as $client)
+                                @foreach ($users as $user)
                                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                         <th class="px-6 py-4">
-                                            {{ $client->id }}
+                                            {{ $user->id }}
                                         </th>
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $client->name }}
+                                            {{ $user->name }}
                                         </th>
                                         <td class="px-6 py-4">
-                                            {{ $client->phone }}
+                                            {{ $user->email }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $client->email }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $client->address }}
-                                        </td>
-
-                                        <td class="px-6 py-4">
-                                            <a href="{{ route('clients.edit', $client->id) }}"
+                                            <a href="{{ route('users.edit', $user->id) }}"
                                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
 
-                                            <form action="{{ route('clients.destroy', $client->id) }}" method="POST">
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
+                                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>    
                                             </form>
                                         </td>
                                     </tr>
@@ -115,9 +94,9 @@
                         </table>
 
                     </div>
-
+                    
                 </div>
-                {{ $clients->links() }}
+                {{ $users->links() }}
             </div>
         </div>
     </div>
